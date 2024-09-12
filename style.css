@@ -83,3 +83,8 @@ h1 {
     justify-content: center;
 }
 
+.button:hover {
+    background-color: aqua;
+    cursor: grab;
+}
+
