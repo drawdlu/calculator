@@ -146,6 +146,9 @@ function deleteChar() {
 
     if (currentNum) {
         currentNum = currentNum.slice(0, -1);
+        if (currentNum.length === 0) {
+            currentNum += '0'
+        }
     } else if (previousNum) {
         previousNum = previousNum.slice(0, -1);
         if (previousNum.length === 0) {
