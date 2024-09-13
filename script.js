@@ -104,8 +104,9 @@ function handleOperateClick() {
                 currentNum = '';
                 previousNum = 'NaN';
                 return;
+            } else {
+                previousNum = operate(previousNum, currentNum, operand);
             }
-            previousNum = operate(previousNum, currentNum, operand);
             operand = '';
         } else {
             previousNum = operate(previousNum, previousNum, operand);
