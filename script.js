@@ -180,7 +180,7 @@ function mouseDown() {
 let buttonClicked;
 
 function changeBackgroundColor(event) {
-    event.target.style.backgroundColor = '#D8A25E';
+    event.target.style.backgroundColor = '#3A435E';
     buttonClicked = event;
 }
 
