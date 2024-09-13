@@ -5,16 +5,17 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-body {
+/* body {
     background-color: bisque;
-}
+} */
 
 .container {
-    background-color: #0C0C0C;
+    background-color: #313E50;
     height: 650px;
     border-radius: 10px;
     max-width: 500px;
     margin: 70px auto;
+    border: 5px solid #3A435E;
 }
 
 .title {
@@ -36,21 +37,20 @@ h1 {
     align-items: flex-end;
     justify-content: flex-end;
     padding: 10px;
-    border: 10px solid black;
+    border: 10px solid #313E50;
 }
 
 .buttons {
     width: 100%;
-    height: 493px;
     display: flex;
     font-size: 50px;
+    color: white;
 }
 
 .left {
     width: 80%;
-    height: 493px;
     border-bottom-left-radius: 10px;
-    padding: 10px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
 }
@@ -63,7 +63,7 @@ h1 {
 }
 
 .calcButton {
-    background-color: #9B3922;
+    background-color: #455561;
     flex: auto;
     border-radius: 10px;
     margin: 5px;
@@ -80,14 +80,14 @@ h1 {
     align-items: center;
     gap: 10px;
     padding-top: 13px;
-    padding-bottom: 13px;
+    padding-bottom: 20px;
     padding-right: 13px;
 }
 
 .sideButton {
     height: 20%;
     width: 100%;
-    background-color: #F2613F;
+    background-color: #5C6672;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -95,5 +95,5 @@ h1 {
 }
 
 .topButtons {
-    background-color: #F2613F;
+    background-color: #6C6F7F;
 }
