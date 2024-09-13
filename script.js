@@ -171,16 +171,19 @@ function mouseDown() {
     })
 }
 
+let buttonClicked;
+
 function changeBackgroundColor(event) {
     event.target.style.backgroundColor = '#D8A25E';
+    buttonClicked = event;
 }
 
 function mouseUp() {
-    document.addEventListener('mouseup', backToDefault)
+    document.addEventListener('mouseup',backToDefault)
 }
 
 function backToDefault(event) {
-    event.target.removeAttribute('style')
+    buttonClicked.target.removeAttribute('style')
 }
 
 
