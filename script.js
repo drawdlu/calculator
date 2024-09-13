@@ -18,7 +18,7 @@ function interpretClicks(event) {
     if (char === 'C') {
         clearData();
     } else if (char === 'Del') {
-        // call backspace function
+        deleteChar();
     } else if (char.match(/\d/)) {
         displayNum(char);
         saveDigit(char);
@@ -47,19 +47,20 @@ function operate(num1, num2, operand) {
 }
 
 function add(num1, num2) {
-    return +num1 + +num2;
+    
+    return (+num1 + +num2).toString();
 }
 
 function subtract(num1, num2) {
-    return +num1 - +num2;
+    return (+num1 - +num2).toString();
 }
 
 function multiply(num1, num2) {
-    return +num1 * +num2;
+    return (+num1 * +num2).toString();
 }
 
 function divide(num1, num2) {
-    return +num1 / +num2;
+    return (+num1 / +num2).toString();
 }
 
 function displayNum(num) {
@@ -114,6 +115,16 @@ function clearData() {
     currentNum = '';
     operand = '';
     initialNumber = true;
+}
+
+function deleteChar() {
+    displayArea.textContent = displayArea.textContent.slice(0, -1);
+
+    if (currentNum) {
+        currentNum = currentNum.slice(0, -1);
+    } else {
+        previousNum = previousNum.slice(0, -1);
+    }
 }
 
 listenToClicks();
