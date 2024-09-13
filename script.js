@@ -25,9 +25,11 @@ function interpretClicks(event) {
     } else if (char === '.') {
         // add a decimal to current digit or ignore if there is already one
     } else if (char.match(/[\+\-\*\/]/)) {
-        clickedOperand(char);
+        initialNumber = false;
+        handleOperateClick();
+        saveOperand(char);
     } else if (char === `=`) {
-        // call operate when operands and operator is complete
+        handleOperateClick();
     }
 }
 
@@ -77,25 +79,29 @@ function saveDigit(digit) {
     }
 }
 
-function clickedOperand(char) {
+function saveOperand(char) {
     if (!previousNum) {
         return;
-    } else if (!operand && !currentNum) {
-        operand = char;
+    }
+
+    operand = char;
+}
+
+function handleOperateClick() {
+    if ( !previousNum || (!operand && !currentNum) ) {
+        return;
     } else if (operand) {
         if (currentNum) {
             previousNum = operate(previousNum, currentNum, operand);
+            operand = '';
         } else {
             previousNum = operate(previousNum, previousNum, operand);
         }
 
         currentNum = '';
-        operand = char;
         clearDisplay();
         displayNum(previousNum);
     }
-
-    initialNumber = false;
 }
 
 function clearDisplay() {
@@ -107,6 +113,7 @@ function clearData() {
     previousNum = '';
     currentNum = '';
     operand = '';
+    initialNumber = true;
 }
 
 listenToClicks();
