@@ -5,8 +5,8 @@ function listenToClicks () {
     })
 }
 
-let firstNum;
-let secondNum;
+let previousNum;
+let currentNum;
 let operand;
 
 function interpretClicks(event) {
@@ -18,10 +18,12 @@ function interpretClicks(event) {
         // call backspace function
     } else if (char.match(/\d/)) {
         // save or add digit to current one
+        // display digit
+        displayNum(char);
     } else if (char === '.') {
         // add a decimal to current digit or ignore if there is already one
     } else if (char.match(/[\+\-\*\/]/)) {
-        // add operand and get ready for second number
+        // add/change/operate operand and get ready for second number
     } else if (char === `=`) {
         // call operate when operands and operator is complete
     }
@@ -30,14 +32,35 @@ function interpretClicks(event) {
 function operate(num1, num2, operand) {
     switch (operand) {
         case '+':
-            return +num1 + +num2;
+            return add(num1, num2);
         case '-': 
-            return +num1 - +num2;
+            return subtract(num1, num2);
         case '/':
-            return +num1 / +num2;
+            return divide(num1, num2);
         case '*': 
-            return +num1 * +num2;
+            return multiply(num1, num2)
     }
+}
+
+function add(num1, num2) {
+    return +num1 + +num2;
+}
+
+function subtract(num1, num2) {
+    return +num1 - +num2;
+}
+
+function multiply(num1, num2) {
+    return +num1 * +num2;
+}
+
+function divide(num1, num2) {
+    return +num1 / +num2;
+}
+
+function displayNum(num) {
+    const displayArea = document.querySelector('.display');
+    displayArea.textContent += num;
 }
 
 listenToClicks();

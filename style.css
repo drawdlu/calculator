@@ -27,6 +27,11 @@ h1 {
 .display {
     height: 100px;
     background-color: antiquewhite;
+    font-size: 60px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 15px;
 }
 
 .buttons {
@@ -87,4 +92,3 @@ h1 {
     background-color: aqua;
     cursor: grab;
 }
-
