@@ -1,4 +1,5 @@
 const displayArea = document.querySelector('.display');
+const calcButtons = document.querySelectorAll('.button');
 
 displayArea.textContent = '';
 let previousNum = '';
@@ -8,7 +9,6 @@ let previousNumActive = true;
 let operand = '';
 
 function listenToClicks () {
-    const calcButtons = document.querySelectorAll('.button');
     calcButtons.forEach( (button) => {
         button.addEventListener('click', interpretClicks)
     })
@@ -163,4 +163,26 @@ function addDecimal() {
     }
 }
 
+function mouseOverButtons() {
+    calcButtons.forEach( (button) => {
+        button.addEventListener('mouseover', mouseDown)
+    })
+}
+
+function mouseDown(event) {
+    event.target.addEventListener('mousedown', changeBackroundColor);
+}
+
+function changeBackroundColor(event) {
+    event.target.style.backgroundColor = 'blue';
+    event.target.addEventListener('mouseup', backToDefault);
+}
+
+function backToDefault(event) {
+    event.target.style.backgroundColor = 'aquamarine';
+}
+
+
+
+mouseOverButtons();
 listenToClicks();
