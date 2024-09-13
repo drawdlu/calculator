@@ -3,6 +3,7 @@ const displayArea = document.querySelector('.display');
 let previousNum = '';
 let currentNum = '';
 let initialNumber = true;
+let previousNumActive = true;
 let operand = '';
 
 function listenToClicks () {
@@ -23,9 +24,10 @@ function interpretClicks(event) {
         displayNum(char);
         saveDigit(char);
     } else if (char === '.') {
-        // add a decimal to current digit or ignore if there is already one
+        addDecimal();
     } else if (char.match(/[\+\-\*\/]/)) {
         initialNumber = false;
+        previousNumActive = false;
         handleOperateClick();
         saveOperand(char);
     } else if (char === `=`) {
@@ -47,20 +49,23 @@ function operate(num1, num2, operand) {
 }
 
 function add(num1, num2) {
-    
-    return (+num1 + +num2).toString();
+    const ans = (+num1 + +num2).toFixed(2);
+    return ans.toString();
 }
 
 function subtract(num1, num2) {
-    return (+num1 - +num2).toString();
+    const ans = (+num1 - +num2).toFixed(2);
+    return ans.toString();
 }
 
 function multiply(num1, num2) {
-    return (+num1 * +num2).toString();
+    const ans = (+num1 * +num2).toFixed(2);
+    return ans.toString();
 }
 
 function divide(num1, num2) {
-    return (+num1 / +num2).toString();
+    const ans = (+num1 / +num2).toFixed(2);
+    return ans.toString();
 }
 
 function displayNum(num) {
@@ -102,6 +107,7 @@ function handleOperateClick() {
         currentNum = '';
         clearDisplay();
         displayNum(previousNum);
+        previousNumActive = true;
     }
 }
 
@@ -124,6 +130,20 @@ function deleteChar() {
         currentNum = currentNum.slice(0, -1);
     } else {
         previousNum = previousNum.slice(0, -1);
+    }
+}
+
+function addDecimal() {
+    if (displayArea.textContent.includes('.')) {
+        return;
+    } 
+
+    displayArea.textContent += '.';
+
+    if (previousNumActive) {
+        previousNum += '.'
+    } else {
+        currentNum += '.'
     }
 }
 
