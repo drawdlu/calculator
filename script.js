@@ -15,7 +15,7 @@ function interpretClicks(event) {
     const char = event.target.textContent
 
     if (char === 'C') {
-        // call clear function
+        clearData();
     } else if (char === 'Del') {
         // call backspace function
     } else if (char.match(/\d/)) {
@@ -60,10 +60,7 @@ function divide(num1, num2) {
 }
 
 function displayNum(num) {
-    if (!operand && !currentNum) {
-        clearDisplay();
-        displayArea.textContent += num;
-    } else if (operand && !currentNum) {
+    if (operand && !currentNum) {
         clearDisplay();
         displayArea.textContent += num;
     } else {
@@ -100,6 +97,13 @@ function clickedOperand(char) {
 
 function clearDisplay() {
     displayArea.textContent = '';
+}
+
+function clearData() {
+    clearDisplay();
+    previousNum = '';
+    currentNum = '';
+    operand = '';
 }
 
 listenToClicks();
