@@ -21,7 +21,7 @@ function interpretClicks(event) {
     } else if (char === 'Del') {
         deleteChar();
     } else if (char.match(/\d/)) {
-        displayNum(char);
+        displayData(char);
         saveDigit(char);
     } else if (char === '.') {
         addDecimal();
@@ -68,7 +68,7 @@ function divide(num1, num2) {
     return ans.toString();
 }
 
-function displayNum(num) {
+function displayData(num) {
     if (operand && !currentNum) {
         clearDisplay();
         displayArea.textContent += num;
@@ -106,7 +106,7 @@ function handleOperateClick() {
 
         currentNum = '';
         clearDisplay();
-        displayNum(previousNum);
+        displayData(previousNum);
         previousNumActive = true;
     }
 }
