@@ -34,7 +34,7 @@ function interpretClicks(event) {
         handleOperateClick();
         saveOperand(char);
     } else if (char === `=`) {
-        handleOperateClick();
+        handleOperateClick(char);
     }
 }
 
@@ -100,7 +100,7 @@ function saveOperand(char) {
     operand = char;
 }
 
-function handleOperateClick() {
+function handleOperateClick(char) {
     if ( !previousNum || (!operand && !currentNum) ) {
         return;
     } else if (operand) {
@@ -116,6 +116,9 @@ function handleOperateClick() {
             }
             operand = '';
         } else {
+            if (char === '=') {
+                return;
+            }
             previousNum = operate(previousNum, previousNum, operand);
         }
 
