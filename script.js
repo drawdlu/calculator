@@ -97,7 +97,6 @@ function saveOperand(char) {
     if (!previousNum) {
         return;
     }
-
     operand = char;
 }
 
@@ -115,9 +114,7 @@ function handleOperateClick() {
             } else {
                 previousNum = operate(previousNum, currentNum, operand);
             }
-
             operand = '';
-
         } else {
             previousNum = operate(previousNum, previousNum, operand);
         }
@@ -147,12 +144,12 @@ function deleteChar() {
     if (currentNum) {
         currentNum = currentNum.slice(0, -1);
         if (currentNum.length === 0) {
-            currentNum += '0'
+            currentNum += '0';
         }
-    } else if (previousNum) {
+    } else {
         previousNum = previousNum.slice(0, -1);
         if (previousNum.length === 0) {
-            previousNum += '0'
+            previousNum += '0';
         }
     }
 }
