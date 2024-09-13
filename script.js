@@ -1,5 +1,6 @@
 const displayArea = document.querySelector('.display');
 
+displayArea.textContent = '';
 let previousNum = '';
 let currentNum = '';
 let initialNumber = true;
@@ -48,23 +49,24 @@ function operate(num1, num2, operand) {
     }
 }
 
+
 function add(num1, num2) {
-    const ans = (+num1 + +num2).toFixed(2);
+    const ans = (+num1 + +num2);
     return ans.toString();
 }
 
 function subtract(num1, num2) {
-    const ans = (+num1 - +num2).toFixed(2);
+    const ans = (+num1 - +num2);
     return ans.toString();
 }
 
 function multiply(num1, num2) {
-    const ans = (+num1 * +num2).toFixed(2);
+    const ans = (+num1 * +num2);
     return ans.toString();
 }
 
 function divide(num1, num2) {
-    const ans = (+num1 / +num2).toFixed(2);
+    const ans = (+num1 / +num2);
     return ans.toString();
 }
 
@@ -74,6 +76,10 @@ function displayData(num) {
         displayArea.textContent += num;
     } else {
         displayArea.textContent += num;
+    }
+
+    if (displayArea.textContent.length > 17) {
+        displayArea.textContent = displayArea.textContent.slice(0, 17);
     }
 }
 
@@ -107,7 +113,9 @@ function handleOperateClick() {
             } else {
                 previousNum = operate(previousNum, currentNum, operand);
             }
+
             operand = '';
+
         } else {
             previousNum = operate(previousNum, previousNum, operand);
         }
