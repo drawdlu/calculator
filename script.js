@@ -2,6 +2,7 @@ const displayArea = document.querySelector('.display');
 
 let previousNum = '';
 let currentNum = '';
+let initialNumber = true;
 let operand = '';
 
 function listenToClicks () {
@@ -69,7 +70,7 @@ function displayNum(num) {
 }
 
 function saveDigit(digit) {
-    if (!previousNum) {
+    if (initialNumber) {
         previousNum += digit;
     } else {
         currentNum += digit;
@@ -93,6 +94,8 @@ function clickedOperand(char) {
         clearDisplay();
         displayNum(previousNum);
     }
+
+    initialNumber = false;
 }
 
 function clearDisplay() {
