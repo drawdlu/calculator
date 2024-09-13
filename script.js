@@ -98,6 +98,13 @@ function handleOperateClick() {
         return;
     } else if (operand) {
         if (currentNum) {
+            if (currentNum === '0' && operand === '/') {
+                clearDisplay();
+                displayData('NaN can do that');
+                currentNum = '';
+                previousNum = 'NaN';
+                return;
+            }
             previousNum = operate(previousNum, currentNum, operand);
             operand = '';
         } else {
