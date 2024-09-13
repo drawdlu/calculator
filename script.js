@@ -1,3 +1,5 @@
+const MAX_DISPLAY_LENGTH = 14;
+
 const displayArea = document.querySelector('.display');
 const calcButtons = document.querySelectorAll('.button');
 
@@ -78,8 +80,8 @@ function displayData(num) {
         displayArea.textContent += num;
     }
 
-    if (displayArea.textContent.length > 17) {
-        displayArea.textContent = displayArea.textContent.slice(0, 17);
+    if (displayArea.textContent.length > MAX_DISPLAY_LENGTH) {
+        displayArea.textContent = displayArea.textContent.slice(0, MAX_DISPLAY_LENGTH);
     }
 }
 
@@ -163,26 +165,26 @@ function addDecimal() {
     }
 }
 
-function mouseOverButtons() {
+function mouseDown() {
     calcButtons.forEach( (button) => {
-        button.addEventListener('mouseover', mouseDown)
+        button.addEventListener('mousedown', changeBackgroundColor)
     })
 }
 
-function mouseDown(event) {
-    event.target.addEventListener('mousedown', changeBackroundColor);
+function changeBackgroundColor(event) {
+    event.target.style.backgroundColor = '#D8A25E';
 }
 
-function changeBackroundColor(event) {
-    event.target.style.backgroundColor = 'blue';
-    event.target.addEventListener('mouseup', backToDefault);
+function mouseUp() {
+    document.addEventListener('mouseup', backToDefault)
 }
 
 function backToDefault(event) {
-    event.target.style.backgroundColor = 'aquamarine';
+    event.target.removeAttribute('style')
 }
 
 
 
-mouseOverButtons();
+mouseDown();
+mouseUp();
 listenToClicks();
