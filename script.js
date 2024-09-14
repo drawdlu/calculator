@@ -1,4 +1,5 @@
 const MAX_DISPLAY_LENGTH = 14;
+const FUNCTION_KEY = 'F';
 
 const displayArea = document.querySelector('.display');
 const calcButtons = document.querySelectorAll('.button');
@@ -30,7 +31,7 @@ function interpretClicks(event) {
         clearData();
     } else if (char === 'Del' || char === 'Backspace' || char === 'Delete') {
         deleteChar();
-    } else if (char.match(/\d/)) {
+    } else if (char.match(/\d/) && !char.includes(FUNCTION_KEY)) {
         displayData(char);
         saveDigit(char);
     } else if (char === '.') {
