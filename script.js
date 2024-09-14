@@ -18,11 +18,18 @@ function listenToClicks () {
 }
 
 function interpretClicks(event) {
-    const char = event.target.textContent
+    let char;
+
+    // check if keyboard or click event
+    if (event.target) {
+        char = event.target.textContent;
+    } else {
+        char = event;
+    }
 
     if (char === 'C') {
         clearData();
-    } else if (char === 'Del') {
+    } else if (char === 'Del' || char === 'Backspace' || char === 'Delete') {
         deleteChar();
     } else if (char.match(/\d/)) {
         displayData(char);
@@ -34,55 +41,22 @@ function interpretClicks(event) {
         previousNumActive = false;
         handleOperateClick();
         saveOperand(char);
-    } else if (char === `=`) {
+    } else if (char === `=` || char === 'Enter') {
         handleOperateClick(char);
     }
 }
 
-function operate(num1, num2, operand) {
-    switch (operand) {
-        case '+':
-            return add(num1, num2);
-        case '-': 
-            return subtract(num1, num2);
-        case '/':
-            return divide(num1, num2);
-        case '*': 
-            return multiply(num1, num2)
-    }
-}
+function addDecimal() {
+    if (displayArea.textContent.includes('.')) {
+        return;
+    } 
 
+    displayArea.textContent += '.';
 
-function add(num1, num2) {
-    const ans = (+num1 + +num2);
-    return ans.toString();
-}
-
-function subtract(num1, num2) {
-    const ans = (+num1 - +num2);
-    return ans.toString();
-}
-
-function multiply(num1, num2) {
-    const ans = (+num1 * +num2);
-    return ans.toString();
-}
-
-function divide(num1, num2) {
-    const ans = (+num1 / +num2);
-    return ans.toString();
-}
-
-function displayData(num) {
-    if (operand && !currentNum) {
-        clearDisplay();
-        displayArea.textContent += num;
+    if (previousNumActive) {
+        previousNum += '.'
     } else {
-        displayArea.textContent += num;
-    }
-
-    if (displayArea.textContent.length > MAX_DISPLAY_LENGTH) {
-        displayArea.textContent = displayArea.textContent.slice(0, MAX_DISPLAY_LENGTH);
+        currentNum += '.'
     }
 }
 
@@ -99,6 +73,19 @@ function saveOperand(char) {
         return;
     }
     operand = char;
+}
+
+function displayData(num) {
+    if (operand && !currentNum) {
+        clearDisplay();
+        displayArea.textContent += num;
+    } else {
+        displayArea.textContent += num;
+    }
+
+    if (displayArea.textContent.length > MAX_DISPLAY_LENGTH) {
+        displayArea.textContent = displayArea.textContent.slice(0, MAX_DISPLAY_LENGTH);
+    }
 }
 
 function handleOperateClick(char) {
@@ -130,6 +117,39 @@ function handleOperateClick(char) {
     }
 }
 
+function operate(num1, num2, operand) {
+    switch (operand) {
+        case '+':
+            return add(num1, num2);
+        case '-': 
+            return subtract(num1, num2);
+        case '/':
+            return divide(num1, num2);
+        case '*': 
+            return multiply(num1, num2)
+    }
+}
+
+function add(num1, num2) {
+    const ans = (+num1 + +num2);
+    return ans.toString();
+}
+
+function subtract(num1, num2) {
+    const ans = (+num1 - +num2);
+    return ans.toString();
+}
+
+function multiply(num1, num2) {
+    const ans = (+num1 * +num2);
+    return ans.toString();
+}
+
+function divide(num1, num2) {
+    const ans = (+num1 / +num2);
+    return ans.toString();
+}
+
 function clearDisplay() {
     displayArea.textContent = '';
 }
@@ -158,23 +178,20 @@ function deleteChar() {
     }
 }
 
-function addDecimal() {
-    if (displayArea.textContent.includes('.')) {
-        return;
-    } 
-
-    displayArea.textContent += '.';
-
-    if (previousNumActive) {
-        previousNum += '.'
-    } else {
-        currentNum += '.'
-    }
-}
-
 mouseDown();
 mouseUp();
 listenToClicks();
+
+// Keyboard support
+function listenToKeys() {
+    document.addEventListener('keydown', pressedKey);
+}
+
+function pressedKey(event) {
+    interpretClicks(event.key.toString())
+}
+
+listenToKeys();
 
 // Styling
 function mouseDown() {
@@ -195,5 +212,7 @@ function mouseUp() {
 }
 
 function backToDefault(event) {
-    buttonClicked.target.removeAttribute('style');
+    if (buttonClicked) {
+        buttonClicked.target.removeAttribute('style');
+    }
 }
