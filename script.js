@@ -20,7 +20,8 @@ function listenToClicks () {
 function interpretClicks(event) {
     let char;
 
-    // check if keyboard or click event
+    // checks if keyboard or click event
+    // event.target returns 'undefined' when it is a keydown event
     if (event.target) {
         char = event.target.textContent;
     } else {
