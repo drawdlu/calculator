@@ -4,11 +4,12 @@ const displayArea = document.querySelector('.display');
 const calcButtons = document.querySelectorAll('.button');
 
 displayArea.textContent = '';
+
 let previousNum = '';
 let currentNum = '';
+let operand = '';
 let initialNumber = true;
 let previousNumActive = true;
-let operand = '';
 
 function listenToClicks () {
     calcButtons.forEach( (button) => {
@@ -171,6 +172,11 @@ function addDecimal() {
     }
 }
 
+mouseDown();
+mouseUp();
+listenToClicks();
+
+// Styling
 function mouseDown() {
     calcButtons.forEach( (button) => {
         button.addEventListener('mousedown', changeBackgroundColor)
@@ -185,15 +191,9 @@ function changeBackgroundColor(event) {
 }
 
 function mouseUp() {
-    document.addEventListener('mouseup',backToDefault)
+    document.addEventListener('mouseup',backToDefault);
 }
 
 function backToDefault(event) {
-    buttonClicked.target.removeAttribute('style')
+    buttonClicked.target.removeAttribute('style');
 }
-
-
-
-mouseDown();
-mouseUp();
-listenToClicks();
