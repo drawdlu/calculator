@@ -31,7 +31,7 @@ function interpretClicks(event) {
         clearData();
     } else if (char === 'Del' || char === 'Backspace' || char === 'Delete') {
         deleteChar();
-    } else if (+char) {
+    } else if (+char || char === '0') {
         displayData(char);
         saveDigit(char);
     } else if (char === '.') {
@@ -102,6 +102,11 @@ function handleOperateClick(char) {
                 previousNum = operate(previousNum, currentNum, operand);
             }
             operand = '';
+
+            if (char === '=') {
+                previousNumActive = true;
+            }
+
         } else {
             if (char === '=') {
                 return;
@@ -112,7 +117,6 @@ function handleOperateClick(char) {
         currentNum = '';
         clearDisplay();
         displayData(previousNum);
-        previousNumActive = true;
     }
 }
 
