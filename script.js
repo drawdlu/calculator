@@ -1,4 +1,4 @@
-const MAX_DISPLAY_LENGTH = 14;
+const MAX_DISPLAY_LENGTH = 13;
 const FUNCTION_KEY = 'F';
 
 const displayArea = document.querySelector('.display');
@@ -32,8 +32,7 @@ function interpretClicks(event) {
     } else if (char === 'Del' || char === 'Backspace' || char === 'Delete') {
         deleteChar();
     } else if (+char || char === '0') {
-        displayData(char);
-        saveDigit(char);
+        handleDigitPressed(char);
     } else if (char === '.') {
         addDecimal();
     } else if (char.match(/[\+\-\*\/]/)) {
@@ -43,6 +42,26 @@ function interpretClicks(event) {
     } else if (char === `=` || char === 'Enter') {
         handleOperateClick(char);
     }
+}
+
+function handleDigitPressed(char) {
+    if (char === '0') {
+        if (activeHasDigits()) {
+            displayData(char);
+            saveDigit(char);
+        }
+    } else {
+        displayData(char);
+        saveDigit(char);
+    }
+}
+
+function activeHasDigits() {
+    if (previousNumActive) {
+        return previousNum.length
+    }
+
+    return currentNum.length
 }
 
 function addDecimal() {
