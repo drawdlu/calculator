@@ -8,7 +8,6 @@ displayArea.textContent = '';
 let previousNum = '';
 let currentNum = '';
 let operand = '';
-let initialNumber = true;
 let previousNumActive = true;
 
 function listenToClicks () {
@@ -37,7 +36,6 @@ function interpretClicks(event) {
     } else if (char === '.') {
         addDecimal();
     } else if (char.match(/[\+\-\*\/]/)) {
-        initialNumber = false;
         previousNumActive = false;
         handleOperateClick();
         saveOperand(char);
@@ -61,7 +59,7 @@ function addDecimal() {
 }
 
 function saveDigit(digit) {
-    if (initialNumber) {
+    if (previousNumActive) {
         previousNum += digit;
     } else {
         currentNum += digit;
@@ -159,7 +157,7 @@ function clearData() {
     previousNum = '';
     currentNum = '';
     operand = '';
-    initialNumber = true;
+    previousNumActive = true;
 }
 
 function deleteChar() {
