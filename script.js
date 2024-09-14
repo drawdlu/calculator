@@ -31,7 +31,7 @@ function interpretClicks(event) {
         clearData();
     } else if (char === 'Del' || char === 'Backspace' || char === 'Delete') {
         deleteChar();
-    } else if (char.match(/\d/) && !char.includes(FUNCTION_KEY)) {
+    } else if (+char) {
         displayData(char);
         saveDigit(char);
     } else if (char === '.') {
