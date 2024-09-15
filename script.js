@@ -48,6 +48,14 @@ function interpretClicks(event) {
 }
 
 function handleSignClick() {
+    if (displayArea.textContent === '') {
+        return;
+    }
+
+    if (operand && currentNum === '') {
+        clearDisplay();
+    }
+
     if (previousNumActive) {
         previousNum = changeSign(previousNum);
     } else {
@@ -58,6 +66,10 @@ function handleSignClick() {
 }
 
 function changeSign(digits) {
+    if (digits.length === 1 && digits === '0') {
+        digits = '';
+    }
+
     if (digits[0] === '-') {
         return digits.slice(1);
     }
