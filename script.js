@@ -32,6 +32,8 @@ function interpretClicks(event) {
         clearData();
     } else if (char === 'Del' || char === 'Backspace' || char === 'Delete') {
         deleteChar();
+    } else if (char === '+/-'){
+        handleSignClick();
     } else if (+char || char === '0') {
         handleDigitPressed(char);
     } else if (char === '.') {
@@ -43,6 +45,24 @@ function interpretClicks(event) {
     } else if (char === `=` || char === 'Enter') {
         handleOperateClick(char);
     }
+}
+
+function handleSignClick() {
+    if (previousNumActive) {
+        previousNum = changeSign(previousNum);
+    } else {
+        currentNum = changeSign(currentNum);
+    }
+
+    displayArea.textContent = changeSign(displayArea.textContent);
+}
+
+function changeSign(digits) {
+    if (digits[0] === '-') {
+        return digits.slice(1);
+    }
+    const digitLength = digits.length + 1
+    return digits.padStart(digitLength, '-');
 }
 
 function handleDigitPressed(char) {
