@@ -98,17 +98,23 @@ function activeHasDigits() {
 }
 
 function addDecimal() {
-    if (displayArea.textContent.includes('.')) {
-        return;
-    } 
-
-    displayArea.textContent += '.';
+    if (operand && currentNum === '') {
+        clearDisplay();
+    }
 
     if (previousNumActive) {
+        if (previousNum.includes('.')) {
+            return;
+        }
         previousNum += '.'
     } else {
+        if (currentNum.includes('.')) {
+            return;
+        }
         currentNum += '.'
     }
+
+    displayArea.textContent += '.';
 }
 
 function saveDigit(digit) {
